@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heroes, Villains & Reported Speech</title>
+
+<style>
+:root {
+--dark: #344d42;
+--green: #668b73;
+--sage: #91aa94;
+--mint: #e2eee3;
+--pale: #f0f6ef;
+--cream: #fbfcf8;
+--white: #ffffff;
+--text: #34443b;
+--muted: #77867b;
+--border: #dce8dc;
+--gold: #d8bd7b;
+--red: #b96d61;
+}
+
+* {
+box-sizing: border-box;
+}
+
+body {
+margin: 0;
+background: var(--cream);
+color: var(--text);
+font-family: Arial, sans-serif;
+line-height: 1.65;
+}
+
+header {
+background: linear-gradient(135deg, #344d42, #789b7e);
+color: white;
+padding: 65px 20px 60px;
+text-align: center;
+}
+
+header .eyebrow {
+letter-spacing: 4px;
+font-size: 12px;
+text-transform: uppercase;
+color: #dcebdc;
+}
+
+header h1 {
+font-family: Georgia, serif;
+font-size: clamp(34px, 6vw, 58px);
+margin: 15px 0;
+line-height: 1.15;
+}
+
+header p {
+max-width: 650px;
+margin: auto;
+color: #eaf2e9;
+font-size: 17px;
+}
+
+nav {
+position: sticky;
+top: 0;
+z-index: 10;
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 8px;
+padding: 12px;
+background: #fbfcf8ed;
+border-bottom: 1px solid var(--border);
+backdrop-filter: blur(10px);
+}
+
+nav a {
+text-decoration: none;
+color: var(--dark);
+font-weight: bold;
+font-size: 14px;
+padding: 9px 15px;
+border-radius: 30px;
+transition: .2s;
+}
+
+nav a:hover {
+background: var(--mint);
+}
+
+main {
+max-width: 1050px;
+margin: auto;
+padding: 25px 18px 70px;
+}
+
+section {
+margin: 50px 0;
+scroll-margin-top: 80px;
+}
+
+.section-label {
+color: var(--green);
+font-size: 12px;
+font-weight: 800;
+letter-spacing: 3px;
+text-transform: uppercase;
+}
+
+h2 {
+font-family: Georgia, serif;
+font-size: clamp(27px, 4vw, 36px);
+color: var(--dark);
+margin: 7px 0 12px;
+}
+
+h3 {
+color: var(--dark);
+font-size: 20px;
+margin-top: 0;
+}
+
+.subtitle {
+color: var(--muted);
+margin-bottom: 25px;
+}
+
+.box,
+.task {
+background: var(--white);
+border: 1px solid var(--border);
+border-radius: 20px;
+padding: 24px;
+margin: 18px 0;
+box-shadow: 0 8px 25px #344d4209;
+}
+
+.task-number {
+display: inline-block;
+background: var(--mint);
+color: var(--dark);
+border-radius: 20px;
+padding: 4px 12px;
+font-size: 12px;
+font-weight: 800;
+margin-bottom: 12px;
+}
+
+.btn {
+border: none;
+background: var(--mint);
+color: var(--dark);
+padding: 10px 17px;
+border-radius: 10px;
+font: inherit;
+font-weight: bold;
+cursor: pointer;
+transition: .2s;
+}
+
+.btn:hover {
+background: #d1e5d3;
+transform: translateY(-1px);
+}
+
+.btn.primary {
+background: var(--green);
+color: white;
+}
+
+.btn.primary:hover {
+background: var(--dark);
+}
+
+.btn:disabled {
+opacity: .5;
+cursor: not-allowed;
+}
+
+.buttons {
+display: flex;
+gap: 10px;
+flex-wrap: wrap;
+align-items: center;
+}
+
+.tabs {
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+margin: 15px 0;
+}
+
+.tabs .btn.active {
+background: var(--dark);
+color: white;
+}
+
+/* VOCABULARY CARDS */
+
+.flashcard {
+max-width: 650px;
+height: 280px;
+margin: 25px auto;
+perspective: 1000px;
+cursor: pointer;
+}
+
+.card-inner {
+position: relative;
+width: 100%;
+height: 100%;
+transition: transform .6s;
+transform-style: preserve-3d;
+}
+
+.flashcard.flipped .card-inner {
+transform: rotateY(180deg);
+}
+
+.card-face {
+position: absolute;
+inset: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 30px;
+border-radius: 22px;
+border: 1px solid var(--border);
+box-shadow: 0 12px 30px #344d4215;
+text-align: center;
+backface-visibility: hidden;
+}
+
+.card-front {
+background: linear-gradient(145deg, #f5faf3, #e3eee2);
+}
+
+.card-back {
+background: linear-gradient(145deg, #dcebdc, #f4f8ed);
+transform: rotateY(180deg);
+}
+
+.card-word {
+font-family: Georgia, serif;
+font-size: clamp(24px, 5vw, 34px);
+font-weight: bold;
+color: var(--dark);
+}
+
+.card-definition {
+max-width: 500px;
+margin-top: 18px;
+color: #63766a;
+}
+
+.card-translation {
+font-size: 26px;
+font-weight: bold;
+color: var(--dark);
+}
+
+.card-hint {
+font-size: 11px;
+letter-spacing: 2px;
+color: var(--muted);
+margin-bottom: 15px;
+}
+
+.card-counter {
+font-weight: bold;
+color: var(--dark);
+padding: 0 10px;
+}
+
+/* EXERCISES */
+
+.question {
+padding: 15px 0;
+border-bottom: 1px solid var(--border);
+}
+
+.question:last-child {
+border-bottom: none;
+}
+
+.question-text {
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.options {
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+}
+
+.options label {
+background: var(--pale);
+padding: 7px 11px;
+border-radius: 9px;
+cursor: pointer;
+border: 1px solid var(--border);
+}
+
+.options label:hover {
+background: var(--mint);
+}
+
+input[type=radio] {
+accent-color: var(--green);
+}
+
+input[type=text] {
+font: inherit;
+padding: 9px 11px;
+border: 1px solid #cddccd;
+border-radius: 9px;
+width: min(100%, 360px);
+margin: 5px 0;
+background: #fcfdfb;
+}
+
+textarea {
+display: block;
+width: 100%;
+min-height: 100px;
+border: 1px solid #cddccd;
+border-radius: 12px;
+padding: 12px;
+font: inherit;
+margin: 10px 0;
+background: #fcfdfb;
+resize: vertical;
+}
+
+textarea:focus,
+input:focus {
+outline: 2px solid #a9c6aa;
+border-color: var(--green);
+}
+
+.feedback {
+margin-top: 12px;
+font-weight: bold;
+}
+
+.good {
+color: #32805b;
+}
+
+.bad {
+color: var(--red);
+}
+
+.wordbank {
+background: var(--pale);
+padding: 13px 16px;
+border-radius: 12px;
+color: var(--dark);
+margin: 12px 0;
+line-height: 2;
+}
+
+.note {
+background: #f5f5e9;
+border-left: 4px solid var(--gold);
+padding: 15px;
+border-radius: 8px;
+margin: 15px 0;
+}
+
+.example {
+background: var(--pale);
+padding: 12px 15px;
+border-radius: 10px;
+margin: 10px 0;
+}
+
+.grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 15px;
+}
+
+.writing-prompt {
+background: var(--pale);
+padding: 15px;
+border-radius: 12px;
+margin: 12px 0;
+}
+
+footer {
+background: var(--dark);
+color: #dcebdc;
+text-align: center;
+padding: 30px;
+font-size: 14px;
+}
+
+@media(max-width:650px) {
+nav {
+justify-content: flex-start;
+}
+
+.box,
+.task {
+padding: 17px;
+}
+
+.grid {
+grid-template-columns: 1fr;
+}
+
+.flashcard {
+height: 260px;
+}
+}
+/* REPORTED SPEECH GRAMMAR CARDS */
+
+.grammar-intro {
+background: linear-gradient(135deg, #edf5eb, #f8fbf5);
+border: 1px solid var(--border);
+border-radius: 18px;
+padding: 22px;
+margin: 20px 0;
+}
+
+.grammar-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 16px;
+margin: 20px 0;
+}
+
+.grammar-card {
+background: white;
+border: 1px solid var(--border);
+border-radius: 17px;
+padding: 20px;
+box-shadow: 0 6px 20px #344d4208;
+transition: .2s;
+}
+
+.grammar-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 10px 25px #344d4215;
+}
+
+.grammar-card h3 {
+font-family: Georgia, serif;
+font-size: 19px;
+margin: 0 0 12px;
+}
+
+.grammar-card .grammar-icon {
+font-size: 25px;
+margin-bottom: 8px;
+}
+
+.grammar-table {
+width: 100%;
+border-collapse: collapse;
+margin: 15px 0;
+font-size: 14px;
+}
+
+.grammar-table th,
+.grammar-table td {
+padding: 10px;
+text-align: left;
+border-bottom: 1px solid var(--border);
+}
+
+.grammar-table th {
+background: var(--mint);
+color: var(--dark);
+}
+
+.grammar-table tr:nth-child(even) {
+background: #f8fbf7;
+}
+
+.grammar-example {
+background: var(--pale);
+border-left: 3px solid var(--sage);
+padding: 11px 14px;
+border-radius: 0 9px 9px 0;
+margin: 10px 0;
+font-size: 14px;
+}
+
+.grammar-highlight {
+color: #4f795a;
+font-weight: bold;
+}
+
+.grammar-warning {
+background: #f5f3e8;
+border-left: 4px solid var(--gold);
+padding: 15px;
+border-radius: 10px;
+margin: 15px 0;
+}
+
+.grammar-section-title {
+color: var(--green);
+font-size: 12px;
+font-weight: 800;
+letter-spacing: 2px;
+text-transform: uppercase;
+margin: 30px 0 10px;
+}
+
+@media(max-width:650px) {
+.grammar-grid {
+grid-template-columns: 1fr;
+}
+
+.grammar-table {
+font-size: 12px;
+}
+
+.grammar-table th,
+.grammar-table td {
+padding: 7px;
+}
+}
+.top-navigation {
+position: sticky;
+top: 0;
+z-index: 1000;
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 10px;
+padding: 12px;
+background: #fbfcf8;
+border-bottom: 1px solid var(--border);
+}
+
+.top-navigation button {
+border: none;
+background: var(--mint);
+color: var(--dark);
+font-size: 14px;
+font-weight: bold;
+padding: 12px 18px;
+border-radius: 30px;
+cursor: pointer;
+min-height: 44px;
+transition: background .2s, color .2s;
+}
+
+.top-navigation button:hover,
+.top-navigation button:focus {
+background: var(--green);
+color: white;
+outline: none;
+}
+
+.top-navigation button:active {
+background: var(--dark);
+color: white;
+}
+
+@media(max-width: 650px) {
+.top-navigation {
+justify-content: center;
+}
+
+.top-navigation button {
+font-size: 12px;
+padding: 10px 12px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="eyebrow">English lesson · B1–B2</div>
+<h1>Heroes, Villains<br>& Reported Speech</h1>
+<p>
+Vocabulary practice, grammar challenges and speaking activities.
+Explore the world of heroes and villains and master reported speech.
+</p>
+</header>
+
+<nav class="top-navigation">
+<button type="button" onclick="goToSection('vocabulary')">Vocabulary</button>
+<button type="button" onclick="goToSection('grammar-guide')">Grammar Guide</button>
+<button type="button" onclick="goToSection('b1')">Reported Speech B1</button>
+<button type="button" onclick="goToSection('b2')">Reported Speech B2</button>
+</nav>
+
+<main>
+
+<!-- ================= VOCABULARY ================= -->
+
+<section id="vocabulary">
+<div class="section-label">Part 1 · Vocabulary</div>
+<h2>Heroes and Villains</h2>
+<p class="subtitle">
+Learn the expressions. Choose a category and click on a card
+to see its Russian translation.
+</p>
+
+<div class="box">
+<h3>Vocabulary flashcards</h3>
+<div class="tabs" id="vocabTabs"></div>
+
+<div class="flashcard" id="flashcard" tabindex="0">
+<div class="card-inner">
+<div class="card-face card-front">
+<div class="card-hint">ENGLISH · CLICK TO FLIP</div>
+<div class="card-word" id="cardWord"></div>
+<div class="card-definition" id="cardDefinition"></div>
+</div>
+
+<div class="card-face card-back">
+<div class="card-hint">RUSSIAN TRANSLATION</div>
+<div class="card-translation" id="cardTranslation"></div>
+</div>
+</div>
+</div>
+
+<div class="buttons" style="justify-content:center">
+<button class="btn" id="prevCard">← Previous</button>
+<span class="card-counter" id="cardCounter"></span>
+<button class="btn" id="nextCard">Next →</button>
+</div>
+</div>
+
+<!-- TASK 1 -->
+
+<div class="task">
+<span class="task-number">TASK 1</span>
+<h3>Robin Hood or a Villain?</h3>
+<p>
+Decide which category each expression belongs to.
+Choose the most suitable option.
+</p>
+
+<div id="classificationQuiz"></div>
+
+<button class="btn primary" onclick="checkQuiz('classificationQuiz')">
+Check answers
+</button>
+<div class="feedback" id="classificationQuizFeedback"></div>
+
+<div class="note">
+Remember: some expressions may describe a character who is
+neither completely good nor completely bad.
+</div>
+</div>
+
+<!-- TASK 2 -->
+
+<div class="task">
+<span class="task-number">TASK 2</span>
+<h3>What kind of person is it?</h3>
+<p>Complete the sentences with the expressions from the box.</p>
+
+<div class="wordbank">
+romantic · greedy · hide from the police · live by their own rules ·
+always travelling · false image · unrealistic · violent ·
+cruel and heartless · people ignore the truth
+</div>
+
+<div id="vocabFill"></div>
+
+<button class="btn primary" onclick="checkFill('vocabFill')">
+Check answers
+</button>
+<div class="feedback" id="vocabFillFeedback"></div>
+</div>
+
+<!-- TASK 3 -->
+
+<div class="task">
+<span class="task-number">TASK 3</span>
+<h3>A Hero or Just a Criminal?</h3>
+
+<div class="example">
+A young man steals money from rich people. He says that he wants
+to help poor families. He doesn't hurt ordinary people, but he
+often has to hide from the police. He is always travelling and
+lives by his own rules. Some people think he is a romantic hero.
+Others believe that stealing is wrong.
+</div>
+
+<p>Discuss the questions and write down your ideas.</p>
+
+<ol>
+<li>Is this man a hero or a criminal? Why?</li>
+<li>Can a person be romantic but also violent?</li>
+<li>Do people sometimes create a false image of criminals?</li>
+<li>Why do people ignore the truth when they like a character?</li>
+<li>Can a cruel and heartless person become a hero in a film?</li>
+<li>Are stories about people who live by their own rules often unrealistic?</li>
+</ol>
+
+<textarea placeholder="Write your ideas here..."></textarea>
+
+<div class="note">
+Speaking challenge: describe a fictional hero or villain.
+Use at least 6 expressions from the vocabulary list.
+</div>
+</div>
+</section>
+
+<!-- ================= REPORTED SPEECH GRAMMAR GUIDE ================= -->
+
+<section id="grammar-guide">
+<!-- Здесь находятся правила Reported Speech -->
+</section>
+
+<div class="section-label">Grammar guide</div>
+<h2>Reported Speech: Rules & Forms</h2>
+
+<p class="subtitle">
+Learn how to report statements, questions, commands and requests.
+Pay attention to changes in verb tenses, pronouns and time expressions.
+</p>
+
+<div class="grammar-intro">
+<h3>What is Reported Speech?</h3>
+
+Reported Speech is used when we tell someone what another person
+said without repeating their exact words.
+
+<div class="grammar-example">
+<b>Direct Speech:</b> Tom said, "I am tired."
+<br>
+<b>Reported Speech:</b> Tom said that he was tired.
+</div>
+
+We usually change the tense when the reporting verb is in the past
+(said, told, asked).
+</div>
+
+
+<div class="grammar-section-title">01 · Tense changes</div>
+
+<h3>How do tenses change?</h3>
+
+<div class="grammar-grid">
+
+<div class="grammar-card">
+<div class="grammar-icon">🌱</div>
+<h3>Present Simple → Past Simple</h3>
+
+<p>Используем Past Simple вместо Present Simple.</p>
+
+<div class="grammar-example">
+Direct: "I <b>work</b> in London."
+<br>
+Reported: He said that he
+<span class="grammar-highlight">worked</span>
+in London.
+</div>
+</div>
+
+<div class="grammar-card">
+<div class="grammar-icon">🌿</div>
+<h3>Present Continuous → Past Continuous</h3>
+
+<p>Меняем am/is/are + V-ing на was/were + V-ing.</p>
+
+<div class="grammar-example">
+Direct: "I <b>am studying</b>."
+<br>
+Reported: She said that she
+<span class="grammar-highlight">was studying</span>.
+</div>
+</div>
+
+<div class="grammar-card">
+<div class="grammar-icon">🍃</div>
+<h3>Present Perfect → Past Perfect</h3>
+
+<p>Меняем have/has + V3 на had + V3.</p>
+
+<div class="grammar-example">
+Direct: "I <b>have finished</b>."
+<br>
+Reported: He said that he
+<span class="grammar-highlight">had finished</span>.
+</div>
+</div>
+
+<div class="grammar-card">
+<div class="grammar-icon">🌳</div>
+<h3>Present Perfect Continuous → Past Perfect Continuous</h3>
+
+<p>Меняем have/has been + V-ing на had been + V-ing.</p>
+
+<div class="grammar-example">
+Direct: "I <b>have been waiting</b>."
+<br>
+Reported: She said that she
+<span class="grammar-highlight">had been waiting</span>.
+</div>
+</div>
+
+<div class="grammar-card">
+<div class="grammar-icon">🌼</div>
+<h3>Past Simple → Past Perfect</h3>
+
+<p>Обычно используем Past Perfect, чтобы показать, что действие произошло раньше.</p>
+
+<div class="grammar-example">
+Direct: "I <b>bought</b> a car."
+<br>
+Reported: He said that he
+<span class="grammar-highlight">had bought</span> a car.
+</div>
+</div>
+
+<div class="grammar-card">
+<div class="grammar-icon">🌾</div>
+<h3>Past Continuous → Past Perfect Continuous</h3>
+
+<p>Возможен переход, если важно подчеркнуть длительность действия до момента речи.</p>
+
+<div class="grammar-example">
+Direct: "I <b>was working</b> all day."
+<br>
+Reported: She said that she
+<span class="grammar-highlight">had been working</span>
+all day.
+</div>
+</div>
+
+<div class="grammar-card">
+<div class="grammar-icon">🌿</div>
+<h3>Past Perfect → Past Perfect</h3>
+
+<p>Past Perfect обычно не меняется.</p>
+
+<div class="grammar-example">
+Direct: "I <b>had seen</b> the film."
+<br>
+Reported: He said that he
+<span class="grammar-highlight">had seen</span>
+the film.
+</div>
+</div>
+
+<div class="grammar-card">
+<div class="grammar-icon">☘️</div>
+<h3>Future forms</h3>
+
+<p>Will обычно меняется на would.</p>
+
+<div class="grammar-example">
+Direct: "I <b>will call</b> you."
+<br>
+Reported: She said that she
+<span class="grammar-highlight">would call</span> me.
+</div>
+
+<div class="grammar-example">
+Future Continuous → would be + V-ing
+<br>
+Future Perfect → would have + V3
+</div>
+</div>
+
+</div>
+
+
+<div class="grammar-section-title">02 · Quick reference</div>
+
+<h3>Tense transformation table</h3>
+
+<div class="box">
+<table class="grammar-table">
+<thead>
+<tr>
+<th>Direct Speech</th>
+<th>Reported Speech</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Present Simple</td>
+<td>Past Simple</td>
+</tr>
+<tr>
+<td>Present Continuous</td>
+<td>Past Continuous</td>
+</tr>
+<tr>
+<td>Present Perfect</td>
+<td>Past Perfect</td>
+</tr>
+<tr>
+<td>Present Perfect Continuous</td>
+<td>Past Perfect Continuous</td>
+</tr>
+<tr>
+<td>Past Simple</td>
+<td>Past Perfect (usually)</td>
+</tr>
+<tr>
+<td>Past Continuous</td>
+<td>Past Perfect Continuous (if duration is emphasised)</td>
+</tr>
+<tr>
+<td>Past Perfect</td>
+<td>Past Perfect (no change)</td>
+</tr>
+<tr>
+<td>Will</td>
+<td>Would</td>
+</tr>
+<tr>
+<td>Can</td>
+<td>Could</td>
+</tr>
+<tr>
+<td>May</td>
+<td>Might</td>
+</tr>
+<tr>
+<td>Must (obligation)</td>
+<td>Had to</td>
+</tr>
+<tr>
+<td>Shall</td>
+<td>Should / Would (depending on meaning)</td>
+</tr>
+</tbody>
+</table>
+
+<div class="grammar-warning">
+<b>Important!</b>
+<br>
+Past Simple does not always have to change to Past Perfect.
+In everyday English, Past Simple is sometimes kept when the
+sequence of events is clear.
+</div>
+</div>
+
+
+<div class="grammar-section-title">03 · Modal verbs</div>
+
+<h3>How do modal verbs change?</h3>
+
+<div class="grammar-grid">
+
+<div class="grammar-card">
+<h3>Can → Could</h3>
+<div class="grammar-example">
+"I can swim."
+<br>
+He said that he <b>could</b> swim.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>May → Might</h3>
+<div class="grammar-example">
+"I may be late."
+<br>
+She said that she <b>might</b> be late.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>Will → Would</h3>
+<div class="grammar-example">
+"I will help you."
+<br>
+He said that he <b>would</b> help me.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>Must → Had to</h3>
+<div class="grammar-example">
+"I must leave."
+<br>
+She said that she <b>had to</b> leave.
+</div>
+<p class="muted">
+Обычно при выражении обязанности.
+</p>
+</div>
+
+<div class="grammar-card">
+<h3>Could → Could</h3>
+<div class="grammar-example">
+"I could help."
+<br>
+He said that he <b>could</b> help.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>Should → Should</h3>
+<div class="grammar-example">
+"You should rest."
+<br>
+She said that I <b>should</b> rest.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>Would → Would</h3>
+<div class="grammar-example">
+"I would like some tea."
+<br>
+He said that he <b>would</b> like some tea.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>Might → Might</h3>
+<div class="grammar-example">
+"I might go out."
+<br>
+She said that she <b>might</b> go out.
+</div>
+</div>
+
+</div>
+
+
+<div class="grammar-section-title">04 · Other changes</div>
+
+<h3>Time and place expressions</h3>
+
+<div class="box">
+<table class="grammar-table">
+<thead>
+<tr>
+<th>Direct Speech</th>
+<th>Reported Speech</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>now</td>
+<td>then / at that moment</td>
+</tr>
+<tr>
+<td>today</td>
+<td>that day</td>
+</tr>
+<tr>
+<td>yesterday</td>
+<td>the day before</td>
+</tr>
+<tr>
+<td>tomorrow</td>
+<td>the next day / the following day</td>
+</tr>
+<tr>
+<td>last week</td>
+<td>the week before</td>
+</tr>
+<tr>
+<td>next week</td>
+<td>the following week</td>
+</tr>
+<tr>
+<td>ago</td>
+<td>before</td>
+</tr>
+<tr>
+<td>here</td>
+<td>there</td>
+</tr>
+<tr>
+<td>this</td>
+<td>that</td>
+</tr>
+<tr>
+<td>these</td>
+<td>those</td>
+</tr>
+<tr>
+<td>tonight</td>
+<td>that night</td>
+</tr>
+</tbody>
+</table>
+
+<div class="grammar-warning">
+These changes depend on the context. If the place or time
+has not changed, the original expression may remain.
+</div>
+</div>
+
+
+<div class="grammar-section-title">05 · Sentence structures</div>
+
+<h3>How to report different types of sentences</h3>
+
+<div class="grammar-grid">
+
+<div class="grammar-card">
+<h3>1. Statements</h3>
+
+<p><b>said (that) + sentence</b></p>
+
+<div class="grammar-example">
+Direct: "I am happy."
+<br>
+Reported: She said (that) she was happy.
+</div>
+
+<p class="muted">
+После said можно использовать that или опустить его.
+</p>
+</div>
+
+<div class="grammar-card">
+<h3>2. Statements with told</h3>
+
+<p><b>told + object + (that) + sentence</b></p>
+
+<div class="grammar-example">
+Direct: "I need help."
+<br>
+Reported: He told me (that) he needed help.
+</div>
+
+<p class="muted">
+После told обязательно указываем, кому сказали.
+</p>
+</div>
+
+<div class="grammar-card">
+<h3>3. Yes / No questions</h3>
+
+<p><b>asked + if / whether + subject + verb</b></p>
+
+<div class="grammar-example">
+Direct: "Do you like music?"
+<br>
+Reported: She asked me if I liked music.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>4. Wh- questions</h3>
+
+<p><b>asked + question word + subject + verb</b></p>
+
+<div class="grammar-example">
+Direct: "Where do you live?"
+<br>
+Reported: He asked me where I lived.
+</div>
+
+<p class="muted">
+Не используем порядок слов вопросительного предложения.
+</p>
+</div>
+
+<div class="grammar-card">
+<h3>5. Commands</h3>
+
+<p><b>told + object + to + verb</b></p>
+
+<div class="grammar-example">
+Direct: "Close the door!"
+<br>
+Reported: He told me to close the door.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>6. Negative commands</h3>
+
+<p><b>told + object + not to + verb</b></p>
+
+<div class="grammar-example">
+Direct: "Don't touch it!"
+<br>
+Reported: She told me not to touch it.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>7. Requests</h3>
+
+<p><b>asked + object + to + verb</b></p>
+
+<div class="grammar-example">
+Direct: "Please help me."
+<br>
+Reported: He asked me to help him.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>8. Suggestions</h3>
+
+<p><b>suggested + -ing</b></p>
+
+<div class="grammar-example">
+Direct: "Let's go out."
+<br>
+Reported: She suggested going out.
+</div>
+</div>
+
+</div>
+
+
+<div class="grammar-section-title">06 · When don't we change the tense?</div>
+
+<div class="box">
+
+<h3>Cases when backshift is not necessary</h3>
+
+<div class="grammar-card">
+<h3>1. Reporting verb in the present</h3>
+
+<div class="grammar-example">
+Direct: "I live in Berlin."
+<br>
+Reported: He <b>says</b> that he <b>lives</b> in Berlin.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>2. General truths and facts</h3>
+
+<div class="grammar-example">
+Direct: "Water boils at 100°C."
+<br>
+Reported: The teacher said that water <b>boils</b> at 100°C.
+</div>
+</div>
+
+<div class="grammar-card">
+<h3>3. Something that is still true</h3>
+
+<div class="grammar-example">
+Direct: "I work at a hospital."
+<br>
+Reported: She said that she <b>works</b> at a hospital.
+</div>
+
+<p class="muted">
+Если информация по-прежнему актуальна, можно оставить настоящее время.
+</p>
+</div>
+
+<div class="grammar-warning">
+<b>Remember:</b>
+Backshift is common when the reporting verb is in the past,
+but it is not automatic in every situation. The speaker's
+meaning and the context are important.
+</div>
+
+</div>
+
+
+<div class="grammar-section-title">07 · Pronoun changes</div>
+
+<div class="box">
+
+<h3>Don't forget to change pronouns!</h3>
+
+<div class="grammar-example">
+Direct: Anna said, "I love my family."
+<br>
+Reported: Anna said that <b>she</b> loved <b>her</b> family.
+</div>
+
+<div class="grammar-example">
+Direct: Peter said to me, "You can use my computer."
+<br>
+Reported: Peter told me that <b>I</b> could use <b>his</b> computer.
+</div>
+
+<p>
+Pronouns change depending on who is speaking, who is listening
+and who is reporting the information.
+</p>
+
+</div>
+
+</section>
+<!-- ================= REPORTED SPEECH B1 ================= -->
+
+<section id="b1">
+<div class="section-label">Part 2 · Grammar</div>
+<h2>Reported Speech · B1</h2>
+<p class="subtitle">
+Statements, questions, commands and requests.
+</p>
+
+<div class="box">
+<h3>Grammar reminder</h3>
+
+<div class="example">
+<b>Direct speech:</b> Tom said, "I am tired."<br>
+<b>Reported speech:</b> Tom said that he was tired.
+</div>
+
+<div class="example">
+<b>Direct question:</b> "Where do you live?"<br>
+<b>Reported question:</b> She asked me where I lived.
+</div>
+
+<div class="example">
+<b>Command:</b> "Close the door."<br>
+<b>Reported command:</b> He told me to close the door.
+</div>
+
+<div class="note">
+Remember:
+<ul>
+<li>Present Simple → Past Simple</li>
+<li>Present Continuous → Past Continuous</li>
+<li>Past Simple → Past Perfect</li>
+<li>Will → Would</li>
+<li>Can → Could</li>
+<li>Questions use statement word order.</li>
+<li>Commands: told / asked + person + to-infinitive.</li>
+</ul>
+</div>
+</div>
+
+<!-- TASK 1 B1 -->
+
+<div class="task">
+<span class="task-number">B1 · TASK 1</span>
+<h3>Change Direct Speech into Reported Speech</h3>
+<p>Rewrite the sentences in reported speech.</p>
+
+<div id="b1Transform"></div>
+
+<button class="btn primary" onclick="checkFill('b1Transform')">
+Check answers
+</button>
+<div class="feedback" id="b1TransformFeedback"></div>
+</div>
+
+<!-- TASK 2 B1 -->
+
+<div class="task">
+<span class="task-number">B1 · TASK 2</span>
+<h3>Reported Questions</h3>
+<p>Rewrite the questions using the beginning provided.</p>
+
+<div id="b1Questions"></div>
+
+<button class="btn primary" onclick="checkFill('b1Questions')">
+Check answers
+</button>
+<div class="feedback" id="b1QuestionsFeedback"></div>
+</div>
+
+<!-- TASK 3 B1 -->
+
+<div class="task">
+<span class="task-number">B1 · TASK 3</span>
+<h3>Reported Commands and Requests</h3>
+<p>Complete the sentences using the correct form.</p>
+
+<div id="b1Commands"></div>
+
+<button class="btn primary" onclick="checkFill('b1Commands')">
+Check answers
+</button>
+<div class="feedback" id="b1CommandsFeedback"></div>
+</div>
+
+<!-- TASK 4 B1 -->
+
+<div class="task">
+<span class="task-number">B1 · TASK 4</span>
+<h3>Choose the Correct Option</h3>
+
+<div id="b1MCQ"></div>
+
+<button class="btn primary" onclick="checkQuiz('b1MCQ')">
+Check answers
+</button>
+<div class="feedback" id="b1MCQFeedback"></div>
+</div>
+
+<!-- TASK 5 B1 -->
+
+<div class="task">
+<span class="task-number">B1 · TASK 5</span>
+<h3>Complete the Dialogue</h3>
+
+<div class="example">
+<b>Emma:</b> "I'm really excited about my new job!"<br>
+<b>Tom:</b> "When did you start working there?"<br>
+<b>Emma:</b> "I started last Monday."<br>
+<b>Tom:</b> "Do you like your colleagues?"<br>
+<b>Emma:</b> "Yes, they are very friendly."<br>
+<b>Tom:</b> "Will you stay there for a long time?"<br>
+<b>Emma:</b> "I hope so!"
+</div>
+
+<p>
+Write a short paragraph beginning with
+<b>Emma told Tom that...</b>
+</p>
+
+<textarea placeholder="Emma told Tom that..."></textarea>
+</div>
+</section>
+
+<!-- ================= REPORTED SPEECH B2 ================= -->
+
+<section id="b2">
+<div class="section-label">Part 3 · Advanced Grammar</div>
+<h2>Reported Speech · B2</h2>
+<p class="subtitle">
+Reporting verbs, complex questions, error correction and transformations.
+</p>
+
+<div class="box">
+<h3>Useful reporting verbs</h3>
+
+<div class="grid">
+<div>
+<div class="example"><b>admit + -ing</b><br>He admitted stealing the money.</div>
+<div class="example"><b>deny + -ing</b><br>She denied taking the bag.</div>
+<div class="example"><b>suggest + -ing</b><br>He suggested going home.</div>
+<div class="example"><b>apologise for + -ing</b><br>She apologised for being late.</div>
+</div>
+
+<div>
+<div class="example"><b>promise + to-infinitive</b><br>He promised to help.</div>
+<div class="example"><b>advise + object + to-infinitive</b><br>She advised me to rest.</div>
+<div class="example"><b>remind + object + to-infinitive</b><br>He reminded me to call.</div>
+<div class="example"><b>warn + object + not to-infinitive</b><br>She warned me not to go.</div>
+</div>
+</div>
+</div>
+
+<!-- TASK 6 B2 -->
+
+<div class="task">
+<span class="task-number">B2 · TASK 6</span>
+<h3>Rewrite Using Reporting Verbs</h3>
+<p>Rewrite the sentences using the reporting verb in brackets.</p>
+
+<div id="b2ReportingVerbs"></div>
+
+<button class="btn primary" onclick="checkFill('b2ReportingVerbs')">
+Check answers
+</button>
+<div class="feedback" id="b2ReportingVerbsFeedback"></div>
+</div>
+
+<!-- TASK 7 B2 -->
+
+<div class="task">
+<span class="task-number">B2 · TASK 7</span>
+<h3>Advanced Reported Questions</h3>
+<p>Rewrite the questions in reported speech.</p>
+
+<div id="b2Questions"></div>
+
+<button class="btn primary" onclick="checkFill('b2Questions')">
+Check answers
+</button>
+<div class="feedback" id="b2QuestionsFeedback"></div>
+</div>
+
+<!-- TASK 8 B2 -->
+
+<div class="task">
+<span class="task-number">B2 · TASK 8</span>
+<h3>Find and Correct the Mistakes</h3>
+<p>Each sentence contains one mistake. Write the corrected sentence.</p>
+
+<div id="b2Errors"></div>
+
+<button class="btn primary" onclick="checkFill('b2Errors')">
+Check answers
+</button>
+<div class="feedback" id="b2ErrorsFeedback"></div>
+</div>
+
+<!-- TASK 9 B2 -->
+
+<div class="task">
+<span class="task-number">B2 · TASK 9</span>
+<h3>Report the News</h3>
+
+<div class="example">
+<b>News 1 — Film industry</b><br>
+A famous actor said:<br>
+"I am leaving the film industry next year. I have been thinking
+about this decision for a long time. I want to spend more time
+with my family."
+</div>
+
+<div class="example">
+<b>News 2 — New jobs</b><br>
+A company spokesperson announced:<br>
+"We are opening three new offices next month. We have already
+hired most of the staff. We will create more than 200 jobs."
+</div>
+
+<div class="example">
+<b>News 3 — An eyewitness</b><br>
+A witness told a journalist:<br>
+"I saw two people running away from the building last night.
+I couldn't recognise their faces. I immediately called the police."
+</div>
+
+<p>
+Choose two news stories and write a short news report.
+Use at least 6 examples of reported speech.
+</p>
+
+<textarea placeholder="Write your news report here..."></textarea>
+</div>
+
+<!-- TASK 10 B2 -->
+
+<div class="task">
+<span class="task-number">B2 · TASK 10</span>
+<h3>Mixed Transformation Challenge</h3>
+<p>Rewrite the sentences using the word in brackets.</p>
+
+<div id="b2Mixed"></div>
+
+<button class="btn primary" onclick="checkFill('b2Mixed')">
+Check answers
+</button>
+<div class="feedback" id="b2MixedFeedback"></div>
+</div>
+
+<!-- FINAL TASK -->
+
+<div class="task">
+<span class="task-number">FINAL CHALLENGE</span>
+<h3>A Story About a Conflict</h3>
+
+<p>
+Write a story of 120–150 words about a conflict between two friends.
+Include:
+</p>
+
+<ul>
+<li>At least 3 reported statements.</li>
+<li>2 reported questions.</li>
+<li>2 reporting verbs from the lesson.</li>
+<li>1 reported command or request.</li>
+</ul>
+
+<textarea placeholder="Write your story here..."></textarea>
+</div>
+</section>
+
+</main>
+
+<footer>
+ENGLISH B1–B2 · HEROES, VILLAINS & REPORTED SPEECH
+</footer>
+
+<script>
+
+/* ===================================
+VOCABULARY DATA
+=================================== */
+
+const vocabulary = {
+"Heroes": [
+["not hurt ordinary people",
+"To avoid causing harm to normal, innocent people.",
+"не причинять вреда обычным людям"],
+
+["steal from the rich",
+"To take money or possessions from wealthy people without permission.",
+"воровать у богатых"],
+
+["romantic",
+"Connected with adventure, emotion or an idealised view of life.",
+"романтичный; романтизированный"],
+
+["young",
+"Having lived for only a relatively short time.",
+"молодой"],
+
+["free",
+"Not controlled or restricted by someone or something.",
+"свободный"],
+
+["always travelling",
+"Moving from one place to another frequently.",
+"постоянно путешествующий"],
+
+["hide from the police",
+"To stay somewhere secret because the police are looking for you.",
+"скрываться от полиции"],
+
+["live by their own rules",
+"To make their own decisions instead of following society's rules.",
+"жить по собственным правилам"]
+],
+
+"Villains": [
+["violent",
+"Using physical force to hurt people or damage things.",
+"жестокий; склонный к насилию"],
+
+["cruel and heartless",
+"Showing no kindness or sympathy for other people.",
+"жестокий и бессердечный"],
+
+["murdered people",
+"Killed people deliberately and illegally.",
+"убивал людей"],
+
+["greedy",
+"Wanting to have more money or possessions than you need.",
+"жадный"],
+
+["people ignore the truth",
+"People choose not to notice or accept what is really happening.",
+"люди игнорируют правду"],
+
+["false image",
+"An incorrect or misleading idea about someone or something.",
+"ложный образ"],
+
+["unrealistic",
+"Not seeming possible or likely in real life.",
+"нереалистичный"]
+]
+};
+
+let currentCategory = Object.keys(vocabulary)[0];
+let currentCard = 0;
+
+function renderVocabTabs() {
+const container = document.getElementById("vocabTabs");
+container.innerHTML = "";
+
+Object.keys(vocabulary).forEach(category => {
+const button = document.createElement("button");
+button.className = "btn";
+
+if (category === currentCategory) {
+button.classList.add("active");
+}
+
+button.textContent = category;
+
+button.addEventListener("click", () => {
+currentCategory = category;
+currentCard = 0;
+renderVocabTabs();
+renderCard();
+});
+
+container.appendChild(button);
+});
+}
+
+function renderCard() {
+const item = vocabulary[currentCategory][currentCard];
+
+document.getElementById("cardWord").textContent = item[0];
+document.getElementById("cardDefinition").textContent = item[1];
+document.getElementById("cardTranslation").textContent = item[2];
+
+document.getElementById("cardCounter").textContent =
+`${currentCard + 1} / ${vocabulary[currentCategory].length}`;
+
+document.getElementById("flashcard").classList.remove("flipped");
+}
+
+document.getElementById("flashcard").addEventListener("click", () => {
+document.getElementById("flashcard").classList.toggle("flipped");
+});
+
+document.getElementById("flashcard").addEventListener("keydown", e => {
+if (e.key === "Enter" || e.key === " ") {
+e.preventDefault();
+document.getElementById("flashcard").classList.toggle("flipped");
+}
+});
+
+document.getElementById("prevCard").addEventListener("click", () => {
+currentCard =
+(currentCard - 1 + vocabulary[currentCategory].length) %
+vocabulary[currentCategory].length;
+
+renderCard();
+});
+
+document.getElementById("nextCard").addEventListener("click", () => {
+currentCard =
+(currentCard + 1) % vocabulary[currentCategory].length;
+
+renderCard();
+});
+
+renderVocabTabs();
+renderCard();
+
+
+/* ===================================
+GENERAL EXERCISE FUNCTIONS
+=================================== */
+
+function makeQuiz(id, data) {
+const container = document.getElementById(id);
+
+container.innerHTML = data.map((q, i) => `
+<div class="question">
+<div class="question-text">${i + 1}. ${q[0]}</div>
+<div class="options">
+${q[1].map((option, j) => `
+<label>
+<input type="radio"
+name="${id}_${i}"
+data-correct="${j === q[2]}">
+${option}
+</label>
+`).join("")}
+</div>
+</div>
+`).join("");
+}
+
+function makeFill(id, data) {
+const container = document.getElementById(id);
+
+container.innerHTML = data.map((q, i) => `
+<div class="question">
+<div class="question-text">${i + 1}. ${q[0]}</div>
+<input type="text"
+class="answer-input"
+data-answer="${q[1]}"
+placeholder="Your answer">
+</div>
+`).join("");
+}
+
+function normalise(text) {
+return text
+.toLowerCase()
+.trim()
+.replace(/[.,!?'"“”‘’]/g, "")
+.replace(/\s+/g, " ");
+}
+
+function checkQuiz(id) {
+const questions = [
+...document.querySelectorAll(`#${id} .question`)
+];
+
+let score = 0;
+let answered = 0;
+
+questions.forEach(question => {
+const selected = question.querySelector("input:checked");
+
+if (selected) {
+answered++;
+
+if (selected.dataset.correct === "true") {
+score++;
+}
+}
+});
+
+const feedback = document.getElementById(id + "Feedback");
+
+feedback.className =
+"feedback " + (score === questions.length ? "good" : "bad");
+
+feedback.textContent =
+`Correct answers: ${score} / ${questions.length}. Answered: ${answered} / ${questions.length}.`;
+}
+
+function checkFill(id) {
+const inputs = [
+...document.querySelectorAll(`#${id} input[data-answer]`)
+];
+
+let score = 0;
+
+inputs.forEach(input => {
+const accepted = input.dataset.answer
+.split("|")
+.map(normalise);
+
+const correct = accepted.includes(normalise(input.value));
+
+if (correct) score++;
+
+input.style.borderColor =
+correct ? "#32805b" : "#b96d61";
+});
+
+const feedback = document.getElementById(id + "Feedback");
+
+feedback.className =
+"feedback " + (score === inputs.length ? "good" : "bad");
+
+feedback.textContent =
+`Correct answers: ${score} / ${inputs.length}. Check the model answers if you need help.`;
+}
+
+
+/* ===================================
+VOCABULARY TASKS
+=================================== */
+
+makeQuiz("classificationQuiz", [
+["not hurt ordinary people", ["A romantic hero", "A dangerous villain"], 0],
+["steal from the rich", ["A romantic hero", "A dangerous villain"], 0],
+["cruel and heartless", ["A romantic hero", "A dangerous villain"], 1],
+["greedy", ["A romantic hero", "A dangerous villain"], 1],
+["live by their own rules", ["A romantic hero", "A dangerous villain"], 0],
+["violent", ["A romantic hero", "A dangerous villain"], 1],
+["hide from the police", ["A romantic hero", "A dangerous villain"], 0],
+["murdered people", ["A romantic hero", "A dangerous villain"], 1],
+["free", ["A romantic hero", "A dangerous villain"], 0],
+["unrealistic", ["A romantic hero", "A dangerous villain"], 1]
+]);
+
+makeFill("vocabFill", [
+[
+"Robin Hood is often described as a ______ hero who helps poor people.",
+"romantic"
+],
+[
+"Some criminals are ______ and only think about money.",
+"greedy"
+],
+[
+"The man had to ______ because the police were looking for him.",
+"hide from the police"
+],
+[
+"Some people prefer to ______ instead of following society's expectations.",
+"live by their own rules"
+],
+[
+"The traveller was ______ and rarely stayed in one place.",
+"always travelling"
+],
+[
+"The film creates a ______ of the criminal as a hero.",
+"false image"
+],
+[
+"The story is too perfect and ______ to be true.",
+"unrealistic"
+],
+[
+"The gang was extremely ______ and attacked innocent people.",
+"violent"
+],
+[
+"The villain was ______ and showed no sympathy.",
+"cruel and heartless"
+],
+[
+"Sometimes ______ because they want to believe a beautiful story.",
+"people ignore the truth"
+]
+]);
+
+
+/* ===================================
+REPORTED SPEECH B1
+=================================== */
+
+// B1 TASK 1
+
+makeFill("b1Transform", [
+[
+'Tom said, "I am tired."',
+"Tom said that he was tired"
+],
+[
+'Mary said, "I have never been to London."',
+"Mary said that she had never been to London"
+],
+[
+'Jack said, "I will call you tomorrow."',
+"Jack said that he would call me the next day|Jack said that he would call her the next day"
+],
+[
+'Anna said, "I bought a new phone yesterday."',
+"Anna said that she had bought a new phone the day before"
+],
+[
+'Peter said, "I can’t come to the party."',
+"Peter said that he couldn't come to the party"
+],
+[
+'They said, "We are watching a film now."',
+"They said that they were watching a film then"
+],
+[
+'Lucy said, "I saw your brother two days ago."',
+"Lucy said that she had seen my brother two days before"
+],
+[
+'Mark said, "I have already finished my homework."',
+"Mark said that he had already finished his homework"
+]
+]);
+
+// B1 TASK 2
+
+makeFill("b1Questions", [
+[
+'"Where do you live?" — She asked me...',
+"where I lived"
+],
+[
+'"Are you feeling better?" — He asked me...',
+"if I was feeling better|whether I was feeling better"
+],
+[
+'"What time does the lesson start?" — I asked the teacher...',
+"what time the lesson started"
+],
+[
+'"Have you ever tried sushi?" — She asked him...',
+"if he had ever tried sushi|whether he had ever tried sushi"
+],
+[
+'"Why did you leave early?" — My friend asked me...',
+"why I had left early"
+],
+[
+'"Will you help me tomorrow?" — He asked her...',
+"if she would help him the next day|whether she would help him the next day"
+]
+]);
+
+// B1 TASK 3
+
+makeFill("b1Commands", [
+[
+'"Close the window, please." — She asked me...',
+"to close the window"
+],
+[
+'"Don’t touch my phone!" — He told his brother...',
+"not to touch his phone"
+],
+[
+'"Please help me with this exercise." — The student asked the teacher...',
+"to help him with that exercise|to help her with that exercise"
+],
+[
+'"Don’t be late tomorrow." — My mum told me...',
+"not to be late the next day"
+],
+[
+'"Wait for me outside." — He asked us...',
+"to wait for him outside"
+],
+[
+'"Don’t forget to bring your book." — The teacher told the students...',
+"not to forget to bring their books"
+]
+]);
+
+// B1 TASK 4
+
+makeQuiz("b1MCQ", [
+["She said that she ______ busy.", ["is", "was", "has been"], 1],
+["He asked me where I ______.", ["live", "lived", "did live"], 1],
+["My teacher told us ______ during the test.", ["not talk", "don't talk", "not to talk"], 2],
+["They said they ______ visit us the following week.", ["will", "would", "can"], 1],
+["He asked if I ______ that film.", ["have seen", "had seen", "did see"], 1],
+["Sarah said she ______ the dress the day before.", ["bought", "had bought", "has bought"], 1]
+]);
+
+
+/* ===================================
+REPORTED SPEECH B2
+=================================== */
+
+// B2 TASK 6
+
+makeFill("b2ReportingVerbs", [
+[
+'"I’m sorry I broke your laptop." (APOLOGISE)',
+"He apologised for breaking my laptop"
+],
+[
+'"You should see a doctor." (ADVISE)',
+"She advised me to see a doctor"
+],
+[
+'"I didn’t steal the money!" (DENY)',
+"He denied stealing the money"
+],
+[
+'"Let’s go somewhere quieter." (SUGGEST)',
+"He suggested going somewhere quieter"
+],
+[
+'"I’ll never tell anyone your secret." (PROMISE)',
+"She promised never to tell anyone my secret"
+],
+[
+'"You must finish this report by Friday." (INSIST)',
+"He insisted that I finish the report by Friday|He insisted that I should finish the report by Friday"
+],
+[
+'"Yes, I took your book without asking." (ADMIT)',
+"He admitted taking my book without asking"
+],
+[
+'"Don’t forget to send me the documents." (REMIND)',
+"She reminded me to send her the documents"
+]
+]);
+
+// B2 TASK 7
+
+makeFill("b2Questions", [
+[
+'"How long have you been waiting for me?" — He asked...',
+"how long I had been waiting for him"
+],
+[
+'"What would you do if you lost your passport?" — She asked me...',
+"what I would do if I lost my passport"
+],
+[
+'"Why hadn’t you told me about the meeting?" — He wanted to know...',
+"why I hadn't told him about the meeting"
+],
+[
+'"Do you think we should cancel the trip?" — She asked...',
+"if I thought we should cancel the trip|whether I thought we should cancel the trip"
+],
+[
+'"Who told you that I was leaving?" — He asked me...',
+"who had told me that he was leaving"
+],
+[
+'"Would you have accepted the offer if they had contacted you earlier?" — She asked him...',
+"if he would have accepted the offer if they had contacted him earlier|whether he would have accepted the offer if they had contacted him earlier"
+]
+]);
+
+// B2 TASK 8
+
+makeFill("b2Errors", [
+[
+"She told that she was feeling much better.",
+"She said that she was feeling much better"
+],
+[
+"He asked me where was I going.",
+"He asked me where I was going"
+],
+[
+"My parents suggested to stay at home.",
+"My parents suggested staying at home"
+],
+[
+"The teacher reminded us don't forget our homework.",
+"The teacher reminded us not to forget our homework"
+],
+[
+"He denied to take the money.",
+"He denied taking the money"
+],
+[
+"She asked me that whether I knew the answer.",
+"She asked me whether I knew the answer"
+],
+[
+"They promised helping us with the project.",
+"They promised to help us with the project"
+],
+[
+"He warned me to not go near the building.",
+"He warned me not to go near the building"
+]
+]);
+
+// B2 TASK 10
+
+makeFill("b2Mixed", [
+[
+'"You should have told me the truth." (ACCUSED)',
+"She accused me of not telling her the truth"
+],
+[
+'"I didn’t break the window." (DENIED)',
+"He denied breaking the window"
+],
+[
+'"Why don’t we organise a surprise party?" (SUGGESTED)',
+"She suggested organising a surprise party"
+],
+[
+'"You mustn’t tell anyone what happened." (WARNED)',
+"He warned me not to tell anyone what had happened"
+],
+[
+'"I’ll pay you back next week." (PROMISED)',
+"She promised to pay me back the following week"
+],
+[
+'"I’m sorry I didn’t invite you." (APOLOGISED)',
+"He apologised for not inviting me"
+],
+[
+'"If I were you, I wouldn’t accept the offer." (ADVISED)',
+"She advised me not to accept the offer"
+],
+[
+'"You took my headphones without asking!" (ACCUSED)',
+"He accused me of taking his headphones without asking"
+]
+]);
+/* TOP NAVIGATION BUTTONS */
+
+document.querySelectorAll(".top-navigation button").forEach(button => {
+button.addEventListener("click", function () {
+const targetId = this.dataset.target;
+const targetSection = document.getElementById(targetId);
+
+if (targetSection) {
+targetSection.scrollIntoView({
+behavior: "smooth",
+block: "start"
+});
+}
+});
+});
+
+</script>
+<script>
+function goToSection(sectionId) {
+const section = document.getElementById(sectionId);
+
+if (section) {
+section.scrollIntoView({
+behavior: "smooth",
+block: "start"
+});
+} else {
+console.error("Раздел не найден: " + sectionId);
+alert("Раздел Grammar Guide не найден. Проверьте ID раздела.");
+}
+}
+</script>
+
+</body>
+</html>
